@@ -4,7 +4,9 @@
   background: #ffffff;
   border-right: 1px solid #e0e0e0;
 
-  transition: margin-left 0.3s ease, opacity 0.3s ease;
+  transition:
+    margin-left 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .open {
@@ -38,11 +40,16 @@
 }
 
 .item:hover {
-  color: #1B8C3E;
+  color: #1b8c3e;
 }
 
 .dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
+}
+
+.active {
+  color: #1b8c3e;
+  font-weight: 600;
 }
