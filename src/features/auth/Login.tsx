@@ -1,42 +1,47 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import { useAppSelector, useAppDispatch } from '../../hooks';
+import { loginStart, loginSuccess, loginFailure } from './authSlice';
 import api from "../../api/axios";
 import styles from "./Login.module.css";
 
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { state, dispatch } = useAuth();
+  const dispatch = useAppDispatch();
+  const { user, loading, error } = useAppSelector((state) => state.auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const from =
     (location.state as { from?: string } | null)?.from || "/dashboard";
 
   useEffect(() => {
-    if (state.user) {
+    if (user) {
       navigate(from, { replace: true });
     }
-  }, [state.user, navigate, from]);
+  }, [user, navigate, from]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    dispatch({ type: "LOGIN_START" });
+    dispatch(loginStart());
     try {
       const { data: users } = await api.get(
         `/users?email=${encodeURIComponent(email)}`,
       );
       if (users.length === 0 || users[0].password !== password) {
-        dispatch({
-          type: "LOGIN_FAILURE",
-          payload: "Email ou mot de passe incorrect",
-        });
+        dispatch(loginFailure("Email ou mot de passe incorrect"));
         return;
       }
       const { password: _ignoredPassword, ...user } = users[0];
-      dispatch({ type: "LOGIN_SUCCESS", payload: user });
+      const fakeToken = btoa(JSON.stringify({
+        userId: user.id,
+        email: user.email,
+        role: 'admin',
+        exp: Date.now() + 3600000 // expire dans 1h
+      }));
+      dispatch(loginSuccess({ user, token: fakeToken }));
     } catch {
-      dispatch({ type: "LOGIN_FAILURE", payload: "Erreur serveur" });
+      dispatch(loginFailure("Erreur serveur"));
     }
   }
 
@@ -45,7 +50,7 @@ export default function Login() {
       <form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={styles.title}>TaskFlow</h1>
         <p className={styles.subtitle}>Connectez-vous pour continuer</p>
-        {state.error && <div className={styles.error}>{state.error}</div>}
+        {error && <div className={styles.error}>{error}</div>}
         <input
           type="email"
           placeholder="Email"
@@ -65,9 +70,9 @@ export default function Login() {
         <button
           type="submit"
           className={styles.button}
-          disabled={state.loading}
+          disabled={loading}
         >
-          {state.loading ? "Connexion..." : "Se connecter"}
+          {loading ? "Connexion..." : "Se connecter"}
         </button>
       </form>
     </div>

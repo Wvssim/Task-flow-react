@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { memo } from 'react';
 import styles from "./Sidebar.module.css";
 
 interface Project {
@@ -9,9 +9,14 @@ interface Project {
 interface SidebarProps {
   projects: Project[];
   isOpen: boolean;
+  onRename: (project: Project) => void;
+  onDelete: (id: string) => void;
+  onSelectProject: (id: string) => void;
+  selectedProjectId: string | null;
 }
 
-export default function Sidebar({ projects, isOpen }: SidebarProps) {
+function Sidebar({ projects, isOpen, onRename, onDelete, onSelectProject, selectedProjectId }: SidebarProps) {
+  console.log('Sidebar re-render');
   return (
     <aside
       className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}
@@ -20,18 +25,22 @@ export default function Sidebar({ projects, isOpen }: SidebarProps) {
       <ul className={styles.list}>
         {projects.map((p) => (
           <li key={p.id}>
-            <NavLink
-              to={`/projects/${p.id}`}
-              className={({ isActive }) =>
-                `${styles.item} ${isActive ? styles.active : ""}`
-              }
+            <div
+              onClick={() => onSelectProject(p.id)}
+              className={`${styles.item} ${selectedProjectId === p.id ? styles.active : ""}`}
             >
               <span className={styles.dot} style={{ background: p.color }} />
-              {p.name}
-            </NavLink>
+              <span className={styles.projectName}>{p.name}</span>
+              <div className={styles.actions}>
+                <button onClick={(e) => { e.stopPropagation(); onRename(p); }}>✎</button>
+                <button onClick={(e) => { e.stopPropagation(); onDelete(p.id); }}>🗑</button>
+              </div>
+            </div>
           </li>
         ))}
       </ul>
     </aside>
   );
 }
+
+export default memo(Sidebar);

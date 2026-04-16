@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "../features/auth/AuthContext";
+import { useAppSelector, useAppDispatch } from '../hooks';
+import { logout } from '../features/auth/authSlice';
 import api from "../api/axios";
 import Header from "../components/Header";
 import styles from "./ProjectDetail.module.css";
@@ -14,7 +15,8 @@ interface Project {
 export default function ProjectDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { state: authState, dispatch } = useAuth();
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -42,10 +44,9 @@ export default function ProjectDetail() {
   return (
     <div className={styles.layout}>
       <Header
-        title="TaskFlow"
-        onMenuClick={() => navigate("/dashboard")}
-        userName={authState.user?.name}
-        onLogout={() => dispatch({ type: "LOGOUT" })}
+        user={user}
+        onLogout={() => dispatch(logout())}
+        onToggleSidebar={() => navigate('/dashboard')}
       />
       <main className={styles.main}>
         <div className={styles.header}>

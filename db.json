@@ -25,6 +25,7 @@
     {
       "id": "todo",
       "title": "À Faire",
+      "projectId": "1",
       "tasks": [
         "Maquettes UI",
         "Specs techniques"
@@ -33,6 +34,7 @@
     {
       "id": "progress",
       "title": "En Cours",
+      "projectId": "1",
       "tasks": [
         "API Auth",
         "Page Login"
@@ -41,9 +43,27 @@
     {
       "id": "done",
       "title": "Terminé",
+      "projectId": "1",
       "tasks": [
         "Setup projet",
         "Config ESLint"
+      ]
+    },
+    {
+      "id": "todo-2",
+      "title": "Backlog",
+      "projectId": "2",
+      "tasks": [
+        "Réunion client",
+        "Choix techno"
+      ]
+    },
+    {
+      "id": "progress-2",
+      "title": "Dev",
+      "projectId": "2",
+      "tasks": [
+        "Composant Header"
       ]
     }
   ],
