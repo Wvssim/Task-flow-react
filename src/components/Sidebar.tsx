@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo } from "react";
 import styles from "./Sidebar.module.css";
 
 interface Project {
@@ -15,8 +15,14 @@ interface SidebarProps {
   selectedProjectId: string | null;
 }
 
-function Sidebar({ projects, isOpen, onRename, onDelete, onSelectProject, selectedProjectId }: SidebarProps) {
-  console.log('Sidebar re-render');
+function Sidebar({
+  projects,
+  isOpen,
+  onRename,
+  onDelete,
+  onSelectProject,
+  selectedProjectId,
+}: SidebarProps) {
   return (
     <aside
       className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}
@@ -32,8 +38,22 @@ function Sidebar({ projects, isOpen, onRename, onDelete, onSelectProject, select
               <span className={styles.dot} style={{ background: p.color }} />
               <span className={styles.projectName}>{p.name}</span>
               <div className={styles.actions}>
-                <button onClick={(e) => { e.stopPropagation(); onRename(p); }}>✎</button>
-                <button onClick={(e) => { e.stopPropagation(); onDelete(p.id); }}>🗑</button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onRename(p);
+                  }}
+                >
+                  ✎
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete(p.id);
+                  }}
+                >
+                  🗑
+                </button>
               </div>
             </div>
           </li>

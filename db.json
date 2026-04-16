@@ -19,6 +19,16 @@
       "id": "f5fa",
       "name": "axios test edit",
       "color": "#36dd71"
+    },
+    {
+      "id": "5f7e",
+      "name": "edit",
+      "color": "#3498db"
+    },
+    {
+      "id": "1cee",
+      "name": "ajout test ",
+      "color": "#8c1212"
     }
   ],
   "columns": [

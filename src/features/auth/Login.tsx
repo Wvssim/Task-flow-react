@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from '../../hooks';
-import { loginStart, loginSuccess, loginFailure } from './authSlice';
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { loginStart, loginSuccess, loginFailure } from "./authSlice";
 import api from "../../api/axios";
 import styles from "./Login.module.css";
 
@@ -33,13 +33,7 @@ export default function Login() {
         return;
       }
       const { password: _ignoredPassword, ...user } = users[0];
-      const fakeToken = btoa(JSON.stringify({
-        userId: user.id,
-        email: user.email,
-        role: 'admin',
-        exp: Date.now() + 3600000 // expire dans 1h
-      }));
-      dispatch(loginSuccess({ user, token: fakeToken }));
+      dispatch(loginSuccess(user));
     } catch {
       dispatch(loginFailure("Erreur serveur"));
     }
@@ -57,6 +51,7 @@ export default function Login() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className={styles.input}
+          autoComplete="email"
           required
         />
         <input
@@ -65,13 +60,10 @@ export default function Login() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className={styles.input}
+          autoComplete="current-password"
           required
         />
-        <button
-          type="submit"
-          className={styles.button}
-          disabled={loading}
-        >
+        <button type="submit" className={styles.button} disabled={loading}>
           {loading ? "Connexion..." : "Se connecter"}
         </button>
       </form>
