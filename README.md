@@ -1,58 +1,36 @@
-# TaskFlow - Avancement TD1 a TD5
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Ce README sert de trace de progression par TD, avec un etat final clair avant livraison.
+## Getting Started
 
-## 1. TD2 - Authentification (socle)
+First, run the development server:
 
-### Objectif
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-- Mettre en place le flux login/logout.
-- Proteger l'acces aux pages privees.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Points verifies
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-- Login utilisateur via backend JSON Server (`/users`).
-- Redirection apres connexion.
-- Logout fonctionnel.
-- Routes privees protegees.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
----
+## Learn More
 
-## 2. TD3 - Routing + CRUD projets
+To learn more about Next.js, take a look at the following resources:
 
-### Objectif
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-# TaskFlow - Objectifs par TD
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## 1. TD2 - Authentification
+## Deploy on Vercel
 
-### Objectif
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-- Mettre en place le flux login/logout.
-- Proteger l'acces aux pages privees.
-
-## 2. TD3 - Routing + CRUD projets
-
-### Objectif
-
-- Mettre en place la navigation applicative.
-- Implementer le CRUD principal sur les projets.
-
-## 3. TD4 - Couche UI
-
-### Objectif
-
-- Clarifier et structurer l'interface sans casser la logique metier.
-
-## 4. TD5 - Version finale
-
-### Objectif
-
-- Centraliser l'authentification avec Redux Toolkit.
-- Ajouter un token JWT simule.
-- Injecter automatiquement le token dans les requetes API.
-- Stabiliser le rendu et optimiser les performances.
-
-## 5. Capture d'ecran - Version finale
-
-![Version finale](./public/Taskflow.png)
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
