@@ -1,58 +1,58 @@
-# TaskFlow - Avancement TD1 a TD5
+# TaskFlow
 
-Ce README sert de trace de progression par TD, avec un etat final clair avant livraison.
+TaskFlow is a React application for organizing projects and their tasks. It combines a dashboard, project details, task workflows, and a lightweight sign-in flow in a single-page interface.
 
-## 1. TD2 - Authentification (socle)
+## Features
 
-### Objectif
+- Project dashboard and project detail routes
+- Project and task data served by a local JSON Server API
+- Client-side state management with Redux Toolkit
+- Route protection for dashboard and project pages
+- Axios-based API requests
 
-- Mettre en place le flux login/logout.
-- Proteger l'acces aux pages privees.
+## Architecture
 
-### Points verifies
+The frontend is built with React 19, TypeScript, and Vite. React Router handles navigation, while Redux Toolkit manages application state. The development API is provided by JSON Server and reads its data from `db.json`.
 
-- Login utilisateur via backend JSON Server (`/users`).
-- Redirection apres connexion.
-- Logout fonctionnel.
-- Routes privees protegees.
+The sign-in flow is for demonstration purposes. Its token is generated in the browser and is not validated by a secure backend. The sample users and data in `db.json` are local demo content; do not use real credentials or treat this setup as production authentication.
 
----
+## Requirements
 
-## 2. TD3 - Routing + CRUD projets
+- Node.js and npm
 
-### Objectif
+## Run locally
 
-# TaskFlow - Objectifs par TD
+From the repository root, install dependencies:
 
-## 1. TD2 - Authentification
+```bash
+npm install
+```
 
-### Objectif
+Start the API and frontend in separate terminals:
 
-- Mettre en place le flux login/logout.
-- Proteger l'acces aux pages privees.
+```bash
+npm run api
+```
 
-## 2. TD3 - Routing + CRUD projets
+```bash
+npm run dev
+```
 
-### Objectif
+Vite prints the local frontend URL in the terminal. The JSON Server API runs on port 4000.
 
-- Mettre en place la navigation applicative.
-- Implementer le CRUD principal sur les projets.
+## Quality checks
 
-## 3. TD4 - Couche UI
+```bash
+npm run lint
+npm run build
+```
 
-### Objectif
+## Main routes
 
-- Clarifier et structurer l'interface sans casser la logique metier.
+- `/login` — demo sign-in
+- `/dashboard` — project overview
+- `/projects/:id` — project detail
 
-## 4. TD5 - Version finale
+## Technology
 
-### Objectif
-
-- Centraliser l'authentification avec Redux Toolkit.
-- Ajouter un token JWT simule.
-- Injecter automatiquement le token dans les requetes API.
-- Stabiliser le rendu et optimiser les performances.
-
-## 5. Capture d'ecran - Version finale
-
-![Version finale](./public/Taskflow.png)
+React · TypeScript · Vite · Redux Toolkit · React Router · Axios · JSON Server
